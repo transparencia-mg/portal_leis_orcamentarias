@@ -1,0 +1,280 @@
+{
+  "version": "4.16.6",
+  "time": 0.113,
+  "errors": [],
+  "tasks": [
+    {
+      "resource": {
+        "description": "Insira a descrição/explicação detalhada deste recurso.",
+        "dialect": {
+          "delimiter": ";"
+        },
+        "encoding": "utf-8-sig",
+        "format": "csv",
+        "hashing": "md5",
+        "name": "downloads",
+        "path": "data/downloads.csv",
+        "profile": "tabular-data-resource",
+        "schema": {
+          "fields": [
+            {
+              "name": "descricao",
+              "type": "string"
+            },
+            {
+              "name": "link",
+              "type": "string"
+            }
+          ]
+        },
+        "scheme": "file",
+        "title": "Insira um título humanamente legível para este recurso.",
+        "stats": {
+          "hash": "d5bf2cb1f4587a9194c8bd7271557f7a",
+          "bytes": 2049,
+          "fields": 2,
+          "rows": 15
+        }
+      },
+      "time": 0.02,
+      "scope": [
+        "hash-count-error",
+        "byte-count-error",
+        "field-count-error",
+        "row-count-error",
+        "blank-header",
+        "extra-label",
+        "missing-label",
+        "blank-label",
+        "duplicate-label",
+        "incorrect-label",
+        "blank-row",
+        "primary-key-error",
+        "foreign-key-error",
+        "extra-cell",
+        "missing-cell",
+        "type-error",
+        "constraint-error",
+        "unique-error"
+      ],
+      "partial": false,
+      "errors": [],
+      "stats": {
+        "errors": 0
+      },
+      "valid": true
+    },
+    {
+      "resource": {
+        "description": "Insira a descrição/explicação detalhada deste recurso.",
+        "dialect": {
+          "delimiter": ";"
+        },
+        "encoding": "utf-8-sig",
+        "format": "csv",
+        "hashing": "md5",
+        "name": "lei_diretrizes_orcamentarias",
+        "path": "data/lei_diretrizes_orcamentarias.csv",
+        "profile": "tabular-data-resource",
+        "schema": {
+          "fields": [
+            {
+              "name": "descricao",
+              "type": "string"
+            },
+            {
+              "name": "lei_estadual",
+              "type": "string"
+            },
+            {
+              "name": "anexo_i_metas_fiscais",
+              "type": "any"
+            },
+            {
+              "name": "anexo_ii_riscos_fiscais",
+              "type": "any"
+            },
+            {
+              "name": "anexo_iii_metodologia_calculo_premissas_utilizadas",
+              "type": "any"
+            },
+            {
+              "name": "anexo_iv_metas_prioridades",
+              "type": "any"
+            }
+          ]
+        },
+        "scheme": "file",
+        "title": "Insira um título humanamente legível para este recurso.",
+        "stats": {
+          "hash": "91b365161fbb806ee3cb33e468706241",
+          "bytes": 3097,
+          "fields": 6,
+          "rows": 9
+        }
+      },
+      "time": 0.02,
+      "scope": [
+        "hash-count-error",
+        "byte-count-error",
+        "field-count-error",
+        "row-count-error",
+        "blank-header",
+        "extra-label",
+        "missing-label",
+        "blank-label",
+        "duplicate-label",
+        "incorrect-label",
+        "blank-row",
+        "primary-key-error",
+        "foreign-key-error",
+        "extra-cell",
+        "missing-cell",
+        "type-error",
+        "constraint-error",
+        "unique-error"
+      ],
+      "partial": false,
+      "errors": [],
+      "stats": {
+        "errors": 0
+      },
+      "valid": true
+    },
+    {
+      "resource": {
+        "description": "Insira a descrição/explicação detalhada deste recurso.",
+        "dialect": {
+          "delimiter": ";"
+        },
+        "encoding": "utf-8-sig",
+        "format": "csv",
+        "hashing": "md5",
+        "name": "lei_orcamentaria_anual",
+        "path": "data/lei_orcamentaria_anual.csv",
+        "profile": "tabular-data-resource",
+        "schema": {
+          "fields": [
+            {
+              "name": "descricao",
+              "type": "string"
+            },
+            {
+              "name": "legislacao",
+              "type": "string"
+            },
+            {
+              "name": "volumes",
+              "type": "string"
+            },
+            {
+              "name": "base_dados",
+              "type": "any"
+            }
+          ]
+        },
+        "scheme": "file",
+        "title": "Insira um título humanamente legível para este recurso.",
+        "stats": {
+          "hash": "16e9f74f23ed7e363385326fbab35f72",
+          "bytes": 2481,
+          "fields": 4,
+          "rows": 9
+        }
+      },
+      "time": 0.03,
+      "scope": [
+        "hash-count-error",
+        "byte-count-error",
+        "field-count-error",
+        "row-count-error",
+        "blank-header",
+        "extra-label",
+        "missing-label",
+        "blank-label",
+        "duplicate-label",
+        "incorrect-label",
+        "blank-row",
+        "primary-key-error",
+        "foreign-key-error",
+        "extra-cell",
+        "missing-cell",
+        "type-error",
+        "constraint-error",
+        "unique-error"
+      ],
+      "partial": false,
+      "errors": [],
+      "stats": {
+        "errors": 0
+      },
+      "valid": true
+    },
+    {
+      "resource": {
+        "description": "Insira a descrição/explicação detalhada deste recurso.",
+        "dialect": {
+          "delimiter": ";"
+        },
+        "encoding": "utf-8-sig",
+        "format": "csv",
+        "hashing": "md5",
+        "name": "plano_mineiro_desenvolvimento_integrado",
+        "path": "data/plano_mineiro_desenvolvimento_integrado.csv",
+        "profile": "tabular-data-resource",
+        "schema": {
+          "fields": [
+            {
+              "name": "descricao",
+              "type": "string"
+            },
+            {
+              "name": "link",
+              "type": "string"
+            }
+          ]
+        },
+        "scheme": "file",
+        "title": "Insira um título humanamente legível para este recurso.",
+        "stats": {
+          "hash": "995cfb26e5a91e8411b6c76292b8fa5e",
+          "bytes": 1946,
+          "fields": 2,
+          "rows": 8
+        }
+      },
+      "time": 0.009,
+      "scope": [
+        "hash-count-error",
+        "byte-count-error",
+        "field-count-error",
+        "row-count-error",
+        "blank-header",
+        "extra-label",
+        "missing-label",
+        "blank-label",
+        "duplicate-label",
+        "incorrect-label",
+        "blank-row",
+        "primary-key-error",
+        "foreign-key-error",
+        "extra-cell",
+        "missing-cell",
+        "type-error",
+        "constraint-error",
+        "unique-error"
+      ],
+      "partial": false,
+      "errors": [],
+      "stats": {
+        "errors": 0
+      },
+      "valid": true
+    }
+  ],
+  "stats": {
+    "errors": 0,
+    "tasks": 4
+  },
+  "valid": true
+}
