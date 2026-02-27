@@ -1,0 +1,85 @@
+name: portal_leis_orcamentarias
+owner_org: ''
+profile: data-package
+resources:
+  - description: Insira a descrição/explicação detalhada deste recurso.
+    dialect:
+      delimiter: ;
+    encoding: utf-8-sig
+    format: csv
+    hashing: md5
+    name: downloads
+    path: data/downloads.csv
+    profile: tabular-data-resource
+    schema:
+      fields:
+        - name: descricao
+          type: string
+        - name: link
+          type: string
+    scheme: file
+    title: Insira um título humanamente legível para este recurso.
+  - description: Insira a descrição/explicação detalhada deste recurso.
+    dialect:
+      delimiter: ;
+    encoding: utf-8-sig
+    format: csv
+    hashing: md5
+    name: lei_diretrizes_orcamentarias
+    path: data/lei_diretrizes_orcamentarias.csv
+    profile: tabular-data-resource
+    schema:
+      fields:
+        - name: descricao
+          type: string
+        - name: lei_estadual
+          type: string
+        - name: anexo_i_metas_fiscais
+          type: any
+        - name: anexo_ii_riscos_fiscais
+          type: any
+        - name: anexo_iii_metodologia_calculo_premissas_utilizadas
+          type: any
+        - name: anexo_iv_metas_prioridades
+          type: any
+    scheme: file
+    title: Insira um título humanamente legível para este recurso.
+  - description: Insira a descrição/explicação detalhada deste recurso.
+    dialect:
+      delimiter: ;
+    encoding: utf-8-sig
+    format: csv
+    hashing: md5
+    name: lei_orcamentaria_anual
+    path: data/lei_orcamentaria_anual.csv
+    profile: tabular-data-resource
+    schema:
+      fields:
+        - name: descricao
+          type: string
+        - name: legislacao
+          type: string
+        - name: volumes
+          type: string
+        - name: base_dados
+          type: any
+    scheme: file
+    title: Insira um título humanamente legível para este recurso.
+  - description: Insira a descrição/explicação detalhada deste recurso.
+    dialect:
+      delimiter: ;
+    encoding: utf-8-sig
+    format: csv
+    hashing: md5
+    name: plano_mineiro_desenvolvimento_integrado
+    path: data/plano_mineiro_desenvolvimento_integrado.csv
+    profile: tabular-data-resource
+    schema:
+      fields:
+        - name: descricao
+          type: string
+        - name: link
+          type: string
+    scheme: file
+    title: Insira um título humanamente legível para este recurso.
+title: Portal_leis_orcamentarias
