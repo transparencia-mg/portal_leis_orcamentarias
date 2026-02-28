@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legislação Orçamentária - Governo de Minas Gerais</title>
+
+    <!-- ==================== BIBLIOTECAS ==================== -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        /* ==================== VARIÁVEIS DE CORES ==================== */
+        :root {
+            --primary-dark: #29435A;
+            --primary-darker: #132837;
+            --accent-red: #B93C42;
+            --accent-bright: #DB233F;
+            --background-light: #EEEFF5;
+            --btn-blue: #29435A;
+            --btn-blue-hover: #1a2f40;
+            --btn-red: #B93C42;
+            --btn-red-hover: #a32c32;
+        }
+
+        /* ==================== ESTILOS GERAIS ==================== */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--background-light);
+            padding-bottom: 15px;
+        }
+
+        /* ==================== DATA ATUALIZAÇÃO ==================== */
+        .data-atualizacao-container {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px 0;
+        }
+
+        .data-atualizacao-box {
+            background: white;
+            border-radius: 8px;
+            padding: 8px 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .data-atualizacao-box i {
+            font-size: 14px;
+            color: var(--accent-red);
+        }
+
+        /* ==================== MENU DE NAVEGAÇÃO ==================== */
+        .nav-tabs-container {
+            background: white;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+            overflow-x: auto;
+        }
+
+        .nav-tabs {
+            border: none !important;
+            gap: 4px;
+            flex-wrap: nowrap;
+            min-width: max-content;
+            margin-bottom: 0 !important;
+        }
+
+        .nav-tabs .nav-link {
+            border: none !important;
+            border-radius: 6px !important;
+            padding: 10px 15px !important;
+            font-weight: 600;
+            color: var(--primary-dark) !important;
+            transition: all 0.3s ease;
+            font-size: 18px;
+            white-space: nowrap;
+            display: inline-flex !important;
+            align-items: center;
+            gap: 8px;
+            background: none !important;
+        }
+
+        .nav-tabs .nav-link:hover {
+            background-color: rgba(41, 67, 90, 0.05) !important;
+            color: var(--accent-red) !important;
+        }
+
+        .nav-tabs .nav-link.active {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-darker) 100%) !important;
+            color: white !important;
+        }
+
+        /* ==================== SUB-MENU PARA PPAG ==================== */
+        .sub-nav-container {
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .sub-nav-btn {
+            border: none;
+            background: var(--background-light);
+            color: var(--primary-dark);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .sub-nav-btn:hover {
+            background: rgba(41, 67, 90, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .sub-nav-btn.active {
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        .sub-nav-btn i {
+            font-size: 16px;
+        }
+
+        /* ==================== CARDS DE TEXTO ==================== */
+        .chart-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+            margin-bottom: 20px;
+            border-left: 5px solid var(--accent-red);
+        }
+
+        .chart-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin: 0 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--background-light);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .text-justify {
+            text-align: justify;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* ==================== TABELAS ==================== */
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+            margin-bottom: 20px;
+            border: 1px solid #dee2e6;
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-darker) 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .table-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .table-badge {
+            background: var(--accent-red);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .table-fixed-header-container {
+            max-height: 500px;
+            overflow: auto;
+        }
+
+        .table {
+            margin: 0;
+            width: 100%;
+            font-size: 14px;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .table thead th {
+            background-color: var(--primary-dark) !important;
+            color: white !important;
+            font-weight: 600;
+            padding: 12px 8px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .table thead th:first-child {
+            border-left: none;
+        }
+
+        .table tbody td {
+            padding: 12px 8px;
+            vertical-align: middle;
+            font-size: 13px;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .table tbody tr:hover {
+            background-color: rgba(41, 67, 90, 0.04);
+        }
+
+        /* ==================== LARGURAS DAS COLUNAS ==================== */
+        .table-loa th:nth-child(1) { width: 40%; }
+        .table-loa th:nth-child(2),
+        .table-loa th:nth-child(3),
+        .table-loa th:nth-child(4) { width: 20%; }
+
+        .table-ldo th:nth-child(1) { width: 30%; }
+        .table-ldo th:nth-child(n+2) { width: 14%; }
+
+        .table-ppag th:nth-child(1) { width: 70%; }
+        .table-ppag th:nth-child(2) { width: 30%; }
+
+        .table-pmdi th:nth-child(1) { width: 70%; }
+        .table-pmdi th:nth-child(2) { width: 30%; }
+
+        .table-downloads th:nth-child(1) { width: 70%; }
+        .table-downloads th:nth-child(2) { width: 30%; }
+
+        /* ==================== BOTÕES ==================== */
+        .btn-blue {
+            background: var(--btn-blue);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-blue:hover {
+            background: var(--btn-blue-hover);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(41, 67, 90, 0.3);
+            text-decoration: none;
+        }
+
+        .btn-red {
+            background: var(--btn-red);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-red:hover {
+            background: var(--btn-red-hover);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(185, 60, 66, 0.3);
+            text-decoration: none;
+        }
+
+        .btn-export {
+            background: white;
+            border: 2px solid var(--primary-darker);
+            color: var(--primary-darker);
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-export:hover {
+            background: var(--primary-darker);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        /* ==================== LOADING ==================== */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(41, 67, 90, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--accent-red);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .table-fixed-header-container {
+                max-height: 400px;
+            }
+            
+            .nav-tabs .nav-link {
+                font-size: 14px;
+                padding: 8px 12px !important;
+            }
+            
+            .sub-nav-container {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div class="container dashboard-spacing">
+
+        <!-- ==================== MENU PRINCIPAL ==================== -->
+        <div class="nav-tabs-container">
+            <ul class="nav nav-tabs" id="budgetTabs" role="tablist">
+                <li class="nav-item">
+                    <button class="nav-link active" id="loa-tab" data-bs-toggle="tab" data-bs-target="#loa" type="button" role="tab">
+                        <i class="material-icons">receipt</i>LOA
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="ldo-tab" data-bs-toggle="tab" data-bs-target="#ldo" type="button" role="tab">
+                        <i class="material-icons">trending_up</i>LDO
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="ppag-tab" data-bs-toggle="tab" data-bs-target="#ppag" type="button" role="tab">
+                        <i class="material-icons">assignment</i>PPAG
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="pmdi-tab" data-bs-toggle="tab" data-bs-target="#pmdi" type="button" role="tab">
+                        <i class="material-icons">map</i>PMDI
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="downloads-tab" data-bs-toggle="tab" data-bs-target="#downloads" type="button" role="tab">
+                        <span class="material-symbols-outlined">download</span>Downloads
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ==================== DATA ATUALIZAÇÃO ==================== -->
+        <div class="data-atualizacao-container">
+            <div class="data-atualizacao-box">
+                <i class="material-icons">update</i>
+                Atualizado em: <span id="data-atualizacao-header">Carregando...</span>
+            </div>
+        </div>
+
+        <!-- ==================== TEXTO INTRODUTÓRIO ==================== -->
+        <div class="chart-container mb-4">
+            <h4 class="chart-title">Sistema de Planejamento e Orçamento</h4>
+            <p class="text-justify">
+                Para prestar serviços públicos à sociedade e mantê-los funcionando adequadamente, o governo arrecada recursos, que em sua maior parte vem dos tributos, e os aplica em políticas públicas destinadas ao desenvolvimento social e econômico da população. Para tanto, o adequado planejamento é fundamental. Esse processo, também conhecido como Sistema de Planejamento e Orçamento, é regido por um conjunto de quatro leis previstas na Constituição Mineira.
+            </p>
+        </div>
+
+        <!-- ==================== CONTEÚDO DAS ABAS ==================== -->
+        <div class="tab-content" id="budgetTabsContent">
+
+            <!-- ==================== ABA LOA ==================== -->
+            <div class="tab-pane fade show active" id="loa" role="tabpanel">
+                <div class="chart-container">
+                    <h4 class="chart-title">Lei Orçamentária Anual — LOA</h4>
+                    <p class="text-justify">
+                        A Lei Orçamentária Anual (LOA) traz a estimativa das receitas que o governo pretende arrecadar no período de um ano e fixa as despesas a serem realizadas com tais recursos. É o instrumento pelo qual o governo materializa as ações planejadas no PPAG e as prioridades definidas na LDO.
+                    </p>
+                </div>
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3 class="table-title">Lei Orçamentária Anual - LOA</h3>
+                        <span class="table-badge" id="loaCount">0 registros</span>
+                    </div>
+                    <div class="table-fixed-header-container">
+                        <table class="table table-loa" id="loaTable">
+                            <thead>
+                                <tr>
+                                    <th>Descrição</th>
+                                    <th>Legislação</th>
+                                    <th>Volumes</th>
+                                    <th>Base de Dados</th>
+                                </tr>
+                            </thead>
+                            <tbody id="loaTableBody">
+                                <tr><td colspan="4" class="text-center">Carregando dados...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== ABA LDO ==================== -->
+            <div class="tab-pane fade" id="ldo" role="tabpanel">
+                <div class="chart-container">
+                    <h4 class="chart-title">Lei de Diretrizes Orçamentárias — LDO</h4>
+                    <p class="text-justify">
+                        A Lei de Diretrizes Orçamentárias (LDO) estabelece a ligação entre o PPAG e a LOA, definindo as metas e prioridades para o ano seguinte. Contém ainda os anexos de metas fiscais, riscos fiscais e a metodologia de cálculo.
+                    </p>
+                </div>
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3 class="table-title">Lei de Diretrizes Orçamentárias - LDO</h3>
+                        <span class="table-badge" id="ldoCount">0 registros</span>
+                    </div>
+                    <div class="table-fixed-header-container">
+                        <table class="table table-ldo" id="ldoTable">
+                            <thead>
+                                <tr>
+                                    <th>Descrição</th>
+                                    <th>Lei Estadual</th>
+                                    <th>Anexo I (Metas Fiscais)</th>
+                                    <th>Anexo II (Riscos Fiscais)</th>
+                                    <th>Anexo III (Metodologia)</th>
+                                    <th>Anexo IV (Prioridades)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ldoTableBody">
+                                <tr><td colspan="6" class="text-center">Carregando dados...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== ABA PPAG ==================== -->
+            <div class="tab-pane fade" id="ppag" role="tabpanel">
+                <div class="chart-container">
+                    <h4 class="chart-title">Plano Plurianual de Ação Governamental — PPAG</h4>
+                    <p class="text-justify">
+                        O Plano Plurianual de Ação Governamental (PPAG) apresenta os programas, ações, objetivos e metas da administração estadual para um período de 4 anos. Inclui relatórios de monitoramento, fundos específicos e avaliações anuais.
+                    </p>
+                </div>
+                
+                <!-- Sub-menu de navegação para PPAG -->
+                <div class="sub-nav-container" id="ppagSubNav">
+                    <button class="sub-nav-btn active" data-ppag-type="ppag">
+                        <i class="material-icons">assignment</i> PPAG por Período
+                    </button>
+                    <button class="sub-nav-btn" data-ppag-type="monitoramento">
+                        <i class="material-icons">assessment</i> Relatórios de Monitoramento
+                    </button>
+                    <button class="sub-nav-btn" data-ppag-type="fem">
+                        <i class="material-icons">volunteer_activism</i> Fundo de Erradicação da Miséria
+                    </button>
+                    <button class="sub-nav-btn" data-ppag-type="bases">
+                        <i class="material-icons">database</i> Bases de Monitoramento
+                    </button>
+                    <button class="sub-nav-btn" data-ppag-type="avaliacoes">
+                        <i class="material-icons">rate_review</i> Relatórios de Avaliação do PPAG
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3 class="table-title">Plano Anual de Ação Governamental - PPAG</h3>
+                        <span class="table-badge" id="ppagCount">0 registros</span>
+                    </div>
+                    <div class="table-fixed-header-container">
+                        <table class="table table-ppag" id="ppagTable">
+                            <thead>
+                                <tr>
+                                    <th>Descrição</th>
+                                    <th>Link</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ppagTableBody">
+                                <tr><td colspan="2" class="text-center">Carregando dados...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== ABA PMDI ==================== -->
+            <div class="tab-pane fade" id="pmdi" role="tabpanel">
+                <div class="chart-container">
+                    <h4 class="chart-title">Plano Mineiro de Desenvolvimento Integrado — PMDI</h4>
+                    <p class="text-justify">
+                        O Plano Mineiro de Desenvolvimento Integrado (PMDI) é o plano estratégico de longo prazo do governo, definindo as diretrizes para o desenvolvimento socioeconômico integrado do Estado de Minas Gerais.
+                    </p>
+                </div>
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3 class="table-title">Plano Mineiro de Desenvolvimento Integrado - PMDI</h3>
+                        <span class="table-badge" id="pmdiCount">0 registros</span>
+                    </div>
+                    <div class="table-fixed-header-container">
+                        <table class="table table-pmdi" id="pmdiTable">
+                            <thead>
+                                <tr>
+                                    <th>Descrição</th>
+                                    <th>Documento</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pmdiTableBody">
+                                <tr><td colspan="2" class="text-center">Carregando dados...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== ABA DOWNLOADS ==================== -->
+            <div class="tab-pane fade" id="downloads" role="tabpanel">
+                <div class="chart-container">
+                    <h4 class="chart-title">Downloads e Materiais de Apoio</h4>
+                    <p class="text-justify">
+                        Materiais complementares como manuais, classificadores, formulários, treinamentos e demais documentos de apoio ao processo de planejamento e orçamento.
+                    </p>
+                </div>
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3 class="table-title">Arquivos para Download</h3>
+                        <span class="table-badge" id="downloadsCount">0 registros</span>
+                    </div>
+                    <div class="table-fixed-header-container">
+                        <table class="table table-downloads" id="downloadsTable">
+                            <thead>
+                                <tr>
+                                    <th>Descrição</th>
+                                    <th>Link</th>
+                                </tr>
+                            </thead>
+                            <tbody id="downloadsTableBody">
+                                <tr><td colspan="2" class="text-center">Carregando dados...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Links para repositórios -->
+                <div class="row mt-4">
+                    <div class="col-md-6 mb-3">
+                        <a href="https://github.com/transparencia-mg/portal_leis_orcamentarias" target="_blank" class="btn-export w-100">
+                            <i class="fab fa-github me-2"></i> Acessar Repositório GitHub
+                        </a>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <a href="https://dados.mg.gov.br/" target="_blank" class="btn-export w-100" style="background: var(--accent-red); color: white; border-color: var(--accent-red);">
+                            <i class="fas fa-database me-2"></i> Acessar Portal Dados MG
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== RODAPÉ ==================== -->
+        <footer class="mt-4 pt-3 text-center border-top">
+            <p class="text-muted small">
+                Governo do Estado de Minas Gerais — Secretaria de Estado de Planejamento e Gestão (SEPLAG)<br>
+                Fonte dos dados: 
+                <a href="https://github.com/transparencia-mg/portal_leis_orcamentarias" target="_blank" class="text-primary">
+                    transparencia-mg/portal_leis_orcamentarias
+                </a>
+            </p>
+        </footer>
+    </div>
+</div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+</div>
+
+<script>
+    // ============================================
+    // CONFIGURAÇÃO DOS ARQUIVOS CSV
+    // ============================================
+    const CSV_FILES = {
+        loa: 'https://raw.githubusercontent.com/transparencia-mg/portal_leis_orcamentarias/main/dataset/data/lei_orcamentaria_anual.csv',
+        ldo: 'https://raw.githubusercontent.com/transparencia-mg/portal_leis_orcamentarias/main/dataset/data/lei_diretrizes_orcamentarias.csv',
+        ppag: 'https://raw.githubusercontent.com/transparencia-mg/portal_leis_orcamentarias/main/dataset/data/plano_anual_acao_governamental.csv',
+        pmdi: 'https://raw.githubusercontent.com/transparencia-mg/portal_leis_orcamentarias/main/dataset/data/plano_mineiro_desenvolvimento_integrado.csv',
+        downloads: 'https://raw.githubusercontent.com/transparencia-mg/portal_leis_orcamentarias/main/dataset/data/downloads.csv'
+    };
+
+    // Variável global para armazenar todos os dados do PPAG
+    let ppagAllData = [];
+
+    document.addEventListener('DOMContentLoaded', function() {
+        updateDataAtualizacao();
+        loadAllData();
+        setupPPAGFilters();
+    });
+
+    function updateDataAtualizacao() {
+        const now = new Date();
+        document.getElementById('data-atualizacao-header').textContent = 
+            now.toLocaleDateString('pt-BR') + ' ' + now.toLocaleTimeString('pt-BR');
+    }
+
+    function showLoading(show) {
+        document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none';
+    }
+
+    async function loadAllData() {
+        showLoading(true);
+        try {
+            await Promise.all([
+                loadCSV(CSV_FILES.loa, 'loa', parseLOA),
+                loadCSV(CSV_FILES.ldo, 'ldo', parseLDO),
+                loadCSV(CSV_FILES.ppag, 'ppag', parsePPAG),
+                loadCSV(CSV_FILES.pmdi, 'pmdi', parsePMDI),
+                loadCSV(CSV_FILES.downloads, 'downloads', parseDownloads)
+            ]);
+        } catch (error) {
+            console.error('Erro ao carregar dados:', error);
+        } finally {
+            showLoading(false);
+        }
+    }
+
+    function loadCSV(url, tableId, parseFunction) {
+        return new Promise((resolve) => {
+            Papa.parse(url, {
+                download: true,
+                header: true,
+                delimiter: ";",
+                skipEmptyLines: true,
+                complete: function(results) {
+                    if (results.data && results.data.length > 0) {
+                        parseFunction(results.data);
+                        updateCount(tableId, results.data.length);
+                    } else {
+                        document.querySelector(`#${tableId}TableBody`).innerHTML = 
+                            `<tr><td colspan="10" class="text-center">Nenhum registro encontrado.</td></tr>`;
+                        updateCount(tableId, 0);
+                    }
+                    resolve();
+                },
+                error: function(error) {
+                    console.error(`Erro no arquivo ${url}:`, error);
+                    document.querySelector(`#${tableId}TableBody`).innerHTML = 
+                        `<tr><td colspan="10" class="text-center text-danger">Erro ao carregar dados.</td></tr>`;
+                    updateCount(tableId, 0);
+                    resolve();
+                }
+            });
+        });
+    }
+
+    function updateCount(tableId, count) {
+        const element = document.getElementById(`${tableId}Count`);
+        if (element) {
+            element.textContent = count + ' registro' + (count !== 1 ? 's' : '');
+        }
+    }
+
+    // ============================================
+    // FUNÇÕES DE PARSING
+    // ============================================
+    function parseLOA(data) {
+        const tbody = document.getElementById('loaTableBody');
+        tbody.innerHTML = data.map(item => {
+            const desc = item.descricao || '';
+            const legislacao = item.legislacao || '';
+            const volumes = item.volumes || '';
+            const baseDados = item.base_dados || '';
+            
+            return `<tr>
+                <td>${desc}</td>
+                <td class="text-center">${legislacao ? `<a href="${legislacao}" target="_blank" class="btn-blue"><i class="material-icons" style="font-size: 16px;">link</i> Acessar</a>` : '-'}</td>
+                <td class="text-center">${volumes ? `<a href="${volumes}" target="_blank" class="btn-red"><i class="material-icons" style="font-size: 16px;">folder</i> Volumes</a>` : '-'}</td>
+                <td class="text-center">${baseDados ? `<a href="${baseDados}" target="_blank" class="btn-blue"><i class="material-icons" style="font-size: 16px;">database</i> Dados</a>` : '-'}</td>
+            </tr>`;
+        }).join('');
+    }
+
+    function parseLDO(data) {
+        const tbody = document.getElementById('ldoTableBody');
+        tbody.innerHTML = data.map(item => {
+            const desc = item.descricao || '';
+            const lei = item.lei_estadual || '';
+            const metas = item.anexo_i_metas_fiscais || '';
+            const riscos = item.anexo_ii_riscos_fiscais || '';
+            const metodologia = item.anexo_iii_metodologia_calculo_premissas_utilizadas || '';
+            const prioridades = item.anexo_iv_metas_prioridades || '';
+            
+            return `<tr>
+                <td>${desc}</td>
+                <td class="text-center">${lei ? `<a href="${lei}" target="_blank" class="btn-blue"><i class="material-icons" style="font-size: 16px;">gavel</i> Acessar Lei</a>` : '-'}</td>
+                <td class="text-center">${metas ? `<a href="${metas}" target="_blank" class="btn-blue"><i class="material-icons" style="font-size: 16px;">trending_up</i> Anexo I</a>` : '-'}</td>
+                <td class="text-center">${riscos ? `<a href="${riscos}" target="_blank" class="btn-blue"><i class="material-icons" style="font-size: 16px;">warning</i> Anexo II</a>` : '-'}</td>
+                <td class="text-center">${metodologia ? `<a href="${metodologia}" target="_blank" class="btn-blue"><i class="material-icons" style="font-size: 16px;">calculate</i> Anexo III</a>` : '-'}</td>
+                <td class="text-center">${prioridades ? `<a href="${prioridades}" target="_blank" class="btn-blue"><i class="material-icons" style="font-size: 16px;">priority_high</i> Anexo IV</a>` : '-'}</td>
+            </tr>`;
+        }).join('');
+    }
+
+    function parsePPAG(data) {
+        ppagAllData = data;
+        filterPPAG('ppag'); // Mostra PPAG por período por padrão
+        updateCount('ppag', data.length);
+    }
+
+    function filterPPAG(type) {
+        let filteredData = [];
+        
+        switch(type) {
+            case 'ppag':
+                filteredData = ppagAllData.filter(item => item.descricao && item.descricao.includes('PPAG') && !item.descricao.includes('Relatório') && !item.descricao.includes('Fundo') && !item.descricao.includes('Bases'));
+                break;
+            case 'monitoramento':
+                filteredData = ppagAllData.filter(item => item.descricao && item.descricao.includes('Relatório Institucional de Monitoramento'));
+                break;
+            case 'fem':
+                filteredData = ppagAllData.filter(item => item.descricao && item.descricao.includes('Fundo de Erradicação da Miséria'));
+                break;
+            case 'bases':
+                filteredData = ppagAllData.filter(item => item.descricao && item.descricao.includes('Bases de Monitoramento'));
+                break;
+            case 'avaliacoes':
+                filteredData = ppagAllData.filter(item => item.descricao && item.descricao.includes('Relatório Anual de Avaliação do PPAG'));
+                break;
+            default:
+                filteredData = ppagAllData;
+        }
+
+        const tbody = document.getElementById('ppagTableBody');
+        if (filteredData.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="2" class="text-center">Nenhum registro encontrado para esta categoria.</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = filteredData.map(item => {
+            const desc = item.descricao || '';
+            const link = item.link || '';
+            const ano = item.ano ? `[${item.ano}] ` : '';
+            
+            return `<tr>
+                <td>${ano}${desc}</td>
+                <td class="text-center">${link ? `<a href="${link}" target="_blank" class="btn-blue"><i class="material-icons" style="font-size: 16px;">download</i> Acessar</a>` : '-'}</td>
+            </tr>`;
+        }).join('');
+    }
+
+    function setupPPAGFilters() {
+        const subNavBtns = document.querySelectorAll('.sub-nav-btn');
+        subNavBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                subNavBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const type = this.getAttribute('data-ppag-type');
+                filterPPAG(type);
+            });
+        });
+    }
+
+    function parsePMDI(data) {
+        const tbody = document.getElementById('pmdiTableBody');
+        tbody.innerHTML = data.map(item => {
+            const desc = item.descricao || '';
+            const link = item.link || '';
+            
+            return `<tr>
+                <td>${desc}</td>
+                <td class="text-center">${link ? `<a href="${link}" target="_blank" class="btn-red"><i class="material-icons" style="font-size: 16px;">picture_as_pdf</i> Acessar</a>` : '-'}</td>
+            </tr>`;
+        }).join('');
+    }
+
+    function parseDownloads(data) {
+        const tbody = document.getElementById('downloadsTableBody');
+        tbody.innerHTML = data.map(item => {
+            const desc = item.descricao || item.nome || 'Documento';
+            const link = item.link || item.url || '#';
+            
+            return `<tr>
+                <td>${desc}</td>
+                <td class="text-center"><a href="${link}" target="_blank" class="btn-blue"><i class="material-icons" style="font-size: 16px;">download</i> Acessar</a></td>
+            </tr>`;
+        }).join('');
+    }
+
+    // Fallback para dados estáticos
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            if (document.getElementById('loaTableBody').innerHTML.includes('Carregando')) {
+                console.log('Usando dados de fallback...');
+                loadFallbackData();
+            }
+        }, 5000);
+    });
+
+    function loadFallbackData() {
+        parseLOA([
+            { descricao: 'Lei Orçamentária Anual - LOA 2026', legislacao: 'https://www.almg.gov.br', volumes: 'https://drive.google.com', base_dados: 'https://drive.google.com' },
+            { descricao: 'Lei Orçamentária Anual - LOA 2025', legislacao: 'https://www.almg.gov.br', volumes: 'https://drive.google.com', base_dados: 'https://drive.google.com' }
+        ]);
+        updateCount('loa', 2);
+        
+        parseLDO([
+            { descricao: 'Lei de Diretrizes Orçamentárias - LDO 2026', lei_estadual: 'https://www.almg.gov.br', anexo_i_metas_fiscais: 'https://drive.google.com', anexo_ii_riscos_fiscais: 'https://drive.google.com' },
+            { descricao: 'Lei de Diretrizes Orçamentárias - LDO 2025', lei_estadual: 'https://www.almg.gov.br', anexo_i_metas_fiscais: 'https://drive.google.com' }
+        ]);
+        updateCount('ldo', 2);
+        
+        parsePPAG([
+            { descricao: 'Plano Plurianual de Ação Governamental - PPAG (2024-2027)', link: 'https://drive.google.com' },
+            { descricao: 'Plano Plurianual de Ação Governamental - PPAG (2020-2023)', link: 'https://drive.google.com' },
+            { descricao: 'Relatório Institucional de Monitoramento - 2025', link: 'https://drive.google.com' },
+            { descricao: 'Relatório Institucional de Monitoramento - 2024', link: 'https://drive.google.com' },
+            { descricao: 'Fundo de Erradicação da Miséria - 2025', link: 'https://drive.google.com' },
+            { descricao: 'Fundo de Erradicação da Miséria - 2024', link: 'https://drive.google.com' },
+            { descricao: 'Bases de Monitoramento - 2025', link: 'https://drive.google.com' },
+            { descricao: 'Bases de Monitoramento - 2024', link: 'https://drive.google.com' },
+            { descricao: 'Relatório Anual de Avaliação do PPAG - 2024', link: 'https://drive.google.com' },
+            { descricao: 'Relatório Anual de Avaliação do PPAG - 2023', link: 'https://drive.google.com' }
+        ]);
+        updateCount('ppag', 10);
+        
+        parsePMDI([
+            { descricao: 'Plano Mineiro de Desenvolvimento Integrado - PMDI 2019-2030', link: 'https://www.mg.gov.br' },
+            { descricao: 'Plano Mineiro de Desenvolvimento Integrado - PMDI 2011-2030', link: 'https://www.mg.gov.br' }
+        ]);
+        updateCount('pmdi', 2);
+        
+        parseDownloads([
+            { descricao: 'Manual de Elaboração do PPAG 2024-2027', link: 'https://drive.google.com' },
+            { descricao: 'Classificador Econômico da Despesa', link: 'https://drive.google.com' },
+            { descricao: 'Treinamento SIGPLAN', link: 'https://drive.google.com' }
+        ]);
+        updateCount('downloads', 3);
+    }
+</script>
+
+</body>
+</html>
