@@ -1,11 +1,11 @@
 {
   "version": "4.16.6",
-  "time": 0.079,
+  "time": 0.096,
   "errors": [],
   "tasks": [
     {
       "resource": {
-        "description": "Insira a descrição/explicação detalhada deste recurso.",
+        "description": "Conjunto de links para diversos downloads sobre Leis Orçamentárias do Estado de Minas Gerais",
         "dialect": {
           "delimiter": ";"
         },
@@ -28,7 +28,7 @@
           ]
         },
         "scheme": "file",
-        "title": "Insira um título humanamente legível para este recurso.",
+        "title": "Links de Leis Orçamentárias",
         "stats": {
           "hash": "107386ab8f0430c102ea9b4e5e04be19",
           "bytes": 2756,
@@ -66,7 +66,7 @@
     },
     {
       "resource": {
-        "description": "Insira a descrição/explicação detalhada deste recurso.",
+        "description": "Conjunto de links para Leis de Diretrizes Orçamentárias",
         "dialect": {
           "delimiter": ";"
         },
@@ -105,7 +105,7 @@
           ]
         },
         "scheme": "file",
-        "title": "Insira um título humanamente legível para este recurso.",
+        "title": "Leis de Diretrizes Orçamentárias",
         "stats": {
           "hash": "91b365161fbb806ee3cb33e468706241",
           "bytes": 3097,
@@ -113,7 +113,7 @@
           "rows": 9
         }
       },
-      "time": 0.017,
+      "time": 0.016,
       "scope": [
         "hash-count-error",
         "byte-count-error",
@@ -143,7 +143,7 @@
     },
     {
       "resource": {
-        "description": "Insira a descrição/explicação detalhada deste recurso.",
+        "description": "Conjunto de links para Leis Orçamentárias Anuais",
         "dialect": {
           "delimiter": ";"
         },
@@ -174,7 +174,7 @@
           ]
         },
         "scheme": "file",
-        "title": "Insira um título humanamente legível para este recurso.",
+        "title": "Lei Orçamentária Anual",
         "stats": {
           "hash": "16e9f74f23ed7e363385326fbab35f72",
           "bytes": 2481,
@@ -212,7 +212,7 @@
     },
     {
       "resource": {
-        "description": "Insira a descrição/explicação detalhada deste recurso.",
+        "description": "Conjunto de links para os Planos Mineiro de Desenvolvimento Integrado",
         "dialect": {
           "delimiter": ";"
         },
@@ -235,7 +235,7 @@
           ]
         },
         "scheme": "file",
-        "title": "Insira um título humanamente legível para este recurso.",
+        "title": "Plano Mineiro de Desenvolvimento Integrado",
         "stats": {
           "hash": "995cfb26e5a91e8411b6c76292b8fa5e",
           "bytes": 1946,
@@ -270,11 +270,72 @@
         "errors": 0
       },
       "valid": true
+    },
+    {
+      "resource": {
+        "description": "Conjunto de links para os Planos Anuais de Ação Governamental",
+        "dialect": {
+          "delimiter": ";"
+        },
+        "encoding": "utf-8-sig",
+        "format": "csv",
+        "hashing": "md5",
+        "name": "plano_anual_acao_governamental",
+        "path": "data/plano_anual_acao_governamental.csv",
+        "profile": "tabular-data-resource",
+        "schema": {
+          "fields": [
+            {
+              "name": "descricao",
+              "type": "string"
+            },
+            {
+              "name": "link",
+              "type": "string"
+            }
+          ]
+        },
+        "scheme": "file",
+        "title": "Plano Anual de Ação Governamental",
+        "stats": {
+          "hash": "0a10fd84ec27552d367124d02f3d1900",
+          "bytes": 8234,
+          "fields": 2,
+          "rows": 62
+        }
+      },
+      "time": 0.011,
+      "scope": [
+        "hash-count-error",
+        "byte-count-error",
+        "field-count-error",
+        "row-count-error",
+        "blank-header",
+        "extra-label",
+        "missing-label",
+        "blank-label",
+        "duplicate-label",
+        "incorrect-label",
+        "blank-row",
+        "primary-key-error",
+        "foreign-key-error",
+        "extra-cell",
+        "missing-cell",
+        "type-error",
+        "constraint-error",
+        "unique-error"
+      ],
+      "partial": false,
+      "errors": [],
+      "stats": {
+        "errors": 0
+      },
+      "valid": true
     }
   ],
   "stats": {
     "errors": 0,
-    "tasks": 4
+    "tasks": 5
   },
   "valid": true
 }
