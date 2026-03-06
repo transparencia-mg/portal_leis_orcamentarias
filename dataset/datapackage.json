@@ -4,7 +4,7 @@
   "profile": "data-package",
   "resources": [
     {
-      "description": "Insira a descrição/explicação detalhada deste recurso.",
+      "description": "Conjunto de links para diversos downloads sobre Leis Orçamentárias do Estado de Minas Gerais",
       "dialect": {
         "delimiter": ";"
       },
@@ -27,10 +27,10 @@
         ]
       },
       "scheme": "file",
-      "title": "Insira um título humanamente legível para este recurso."
+      "title": "Links de Leis Orçamentárias"
     },
     {
-      "description": "Insira a descrição/explicação detalhada deste recurso.",
+      "description": "Conjunto de links para Leis de Diretrizes Orçamentárias",
       "dialect": {
         "delimiter": ";"
       },
@@ -69,10 +69,10 @@
         ]
       },
       "scheme": "file",
-      "title": "Insira um título humanamente legível para este recurso."
+      "title": "Leis de Diretrizes Orçamentárias"
     },
     {
-      "description": "Insira a descrição/explicação detalhada deste recurso.",
+      "description": "Conjunto de links para Leis Orçamentárias Anuais",
       "dialect": {
         "delimiter": ";"
       },
@@ -103,10 +103,10 @@
         ]
       },
       "scheme": "file",
-      "title": "Insira um título humanamente legível para este recurso."
+      "title": "Lei Orçamentária Anual"
     },
     {
-      "description": "Insira a descrição/explicação detalhada deste recurso.",
+      "description": "Conjunto de links para os Planos Mineiro de Desenvolvimento Integrado",
       "dialect": {
         "delimiter": ";"
       },
@@ -129,8 +129,34 @@
         ]
       },
       "scheme": "file",
-      "title": "Insira um título humanamente legível para este recurso."
+      "title": "Plano Mineiro de Desenvolvimento Integrado"
+    },
+    {
+      "description": "Conjunto de links para os Planos Anuais de Ação Governamental",
+      "dialect": {
+        "delimiter": ";"
+      },
+      "encoding": "utf-8-sig",
+      "format": "csv",
+      "hashing": "md5",
+      "name": "plano_anual_acao_governamental",
+      "path": "data/plano_anual_acao_governamental.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "descricao",
+            "type": "string"
+          },
+          {
+            "name": "link",
+            "type": "string"
+          }
+        ]
+      },
+      "scheme": "file",
+      "title": "Plano Anual de Ação Governamental"
     }
   ],
-  "title": "Portal_leis_orcamentarias"
+  "title": "Leis Orçamentárias"
 }
