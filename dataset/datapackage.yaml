@@ -2,7 +2,7 @@ name: portal_leis_orcamentarias
 owner_org: ''
 profile: data-package
 resources:
-  - description: Insira a descrição/explicação detalhada deste recurso.
+  - description: Conjunto de links para diversos downloads sobre Leis Orçamentárias do Estado de Minas Gerais
     dialect:
       delimiter: ;
     encoding: utf-8-sig
@@ -18,8 +18,8 @@ resources:
         - name: link
           type: string
     scheme: file
-    title: Insira um título humanamente legível para este recurso.
-  - description: Insira a descrição/explicação detalhada deste recurso.
+    title: Links de Leis Orçamentárias
+  - description: Conjunto de links para Leis de Diretrizes Orçamentárias
     dialect:
       delimiter: ;
     encoding: utf-8-sig
@@ -43,8 +43,8 @@ resources:
         - name: anexo_iv_metas_prioridades
           type: any
     scheme: file
-    title: Insira um título humanamente legível para este recurso.
-  - description: Insira a descrição/explicação detalhada deste recurso.
+    title: Leis de Diretrizes Orçamentárias
+  - description: Conjunto de links para Leis Orçamentárias Anuais
     dialect:
       delimiter: ;
     encoding: utf-8-sig
@@ -64,8 +64,8 @@ resources:
         - name: base_dados
           type: any
     scheme: file
-    title: Insira um título humanamente legível para este recurso.
-  - description: Insira a descrição/explicação detalhada deste recurso.
+    title: Lei Orçamentária Anual
+  - description: Conjunto de links para os Planos Mineiro de Desenvolvimento Integrado
     dialect:
       delimiter: ;
     encoding: utf-8-sig
@@ -81,5 +81,22 @@ resources:
         - name: link
           type: string
     scheme: file
-    title: Insira um título humanamente legível para este recurso.
-title: Portal_leis_orcamentarias
+    title: Plano Mineiro de Desenvolvimento Integrado
+  - description: Conjunto de links para os Planos Anuais de Ação Governamental
+    dialect:
+      delimiter: ;
+    encoding: utf-8-sig
+    format: csv
+    hashing: md5
+    name: plano_anual_acao_governamental
+    path: data/plano_anual_acao_governamental.csv
+    profile: tabular-data-resource
+    schema:
+      fields:
+        - name: descricao
+          type: string
+        - name: link
+          type: string
+    scheme: file
+    title: Plano Anual de Ação Governamental
+title: Leis Orçamentárias
