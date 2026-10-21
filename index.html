@@ -295,6 +295,20 @@
             text-decoration: none;
         }
 
+        .badge-tramitacao {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #8a5a00;
+            background: #fff4dc;
+            border: 1px solid #f0d08a;
+            white-space: nowrap;
+        }
+
         .btn-red {
             background: var(--btn-red);
             color: white;
@@ -702,6 +716,17 @@
     // ============================================
     // FUNÇÕES DE PARSING
     // ============================================
+    // Renderiza um botão quando o valor é uma URL; caso contrário, exibe o texto
+    // (ex.: "Em tramitação") como selo informativo.
+    function renderCell(value, btnClass, icon, label) {
+        const v = (value || '').trim();
+        if (!v) return '-';
+        if (/^https?:\/\//i.test(v)) {
+            return `<a href="${v}" target="_blank" class="${btnClass}"><i class="material-icons" style="font-size: 16px;">${icon}</i> ${label}</a>`;
+        }
+        return `<span class="badge-tramitacao"><i class="material-icons" style="font-size: 16px;">hourglass_empty</i> ${v}</span>`;
+    }
+
     function parseLOA(data) {
         const tbody = document.getElementById('loaTableBody');
         tbody.innerHTML = data.map(item => {
@@ -712,9 +737,9 @@
             
             return `<tr>
                 <td>${desc}</td>
-                <td class="text-center">${legislacao ? `<a href="${legislacao}" target="_blank" class="btn-blue"><i class="material-icons" style="font-size: 16px;">link</i> Acessar</a>` : '-'}</td>
-                <td class="text-center">${volumes ? `<a href="${volumes}" target="_blank" class="btn-red"><i class="material-icons" style="font-size: 16px;">folder</i> Volumes</a>` : '-'}</td>
-                <td class="text-center">${baseDados ? `<a href="${baseDados}" target="_blank" class="btn-blue"><i class="material-icons" style="font-size: 16px;">database</i>Dados</a>` : '-'}</td>
+                <td class="text-center">${renderCell(legislacao, 'btn-blue', 'link', 'Acessar')}</td>
+                <td class="text-center">${renderCell(volumes, 'btn-red', 'folder', 'Volumes')}</td>
+                <td class="text-center">${renderCell(baseDados, 'btn-blue', 'database', 'Dados')}</td>
             </tr>`;
         }).join('');
     }
