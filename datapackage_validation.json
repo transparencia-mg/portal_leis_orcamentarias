@@ -1,6 +1,6 @@
 {
   "version": "4.16.6",
-  "time": 0.09,
+  "time": 0.097,
   "errors": [],
   "tasks": [
     {
@@ -36,7 +36,7 @@
           "rows": 21
         }
       },
-      "time": 0.009,
+      "time": 0.01,
       "scope": [
         "hash-count-error",
         "byte-count-error",
@@ -113,7 +113,7 @@
           "rows": 10
         }
       },
-      "time": 0.015,
+      "time": 0.017,
       "scope": [
         "hash-count-error",
         "byte-count-error",
@@ -176,13 +176,13 @@
         "scheme": "file",
         "title": "Lei Orçamentária Anual",
         "stats": {
-          "hash": "16e9f74f23ed7e363385326fbab35f72",
-          "bytes": 2481,
+          "hash": "44eb5297e6fd332beea073d6e2cbdc4d",
+          "bytes": 2633,
           "fields": 4,
-          "rows": 9
+          "rows": 10
         }
       },
-      "time": 0.011,
+      "time": 0.012,
       "scope": [
         "hash-count-error",
         "byte-count-error",
@@ -243,7 +243,7 @@
           "rows": 8
         }
       },
-      "time": 0.01,
+      "time": 0.009,
       "scope": [
         "hash-count-error",
         "byte-count-error",
@@ -304,7 +304,7 @@
           "rows": 62
         }
       },
-      "time": 0.01,
+      "time": 0.011,
       "scope": [
         "hash-count-error",
         "byte-count-error",
